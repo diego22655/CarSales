@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="master.xhtml">
+
+	<ui:define name="title">
+        .:Registro de Automoviles por Propietario:.
+    </ui:define>
+
+	<ui:define name="titleCont">
+		<span>Automoviles</span>
+	</ui:define>
+
+	<ui:define name="content">
+		<h:form>		
+			<h:outputLabel for="idAutomovil" value="Id " styleClass="control-label" />
+			<p:inputText autocomplete="off" id="idAutomovil"
+				styleClass="form-control" value="#{automovilController.automovil.idAutomovil}"
+				required="true" />
+				
+			<h:outputLabel for="placaAutomovil" value="Placa Automovil "
+				styleClass="control-label" />
+			<p:inputText autocomplete="off" id="placaAutomovil"
+				styleClass="form-control"
+				value="#{automovilController.automovil.placaAutomovil}" maxlength="6"
+				required="true" />
+				
+			<p:outputLabel for="cboPropietario" value="Propietario" />
+			<p:selectOneMenu id="cboPropietario" value="#{automovilController.automovil.propietario}"
+				converter="omnifaces.SelectItemsConverter">
+				<f:selectItems value="#{automovilController.listaPropietarios}" var = "a" 
+					itemLabel="#{a.nombreCompleto}" itemValue="#{a}"/>
+			</p:selectOneMenu> 						
+				
+			<br />
+
+			<p:commandButton value="Grabar"
+				actionListener="#{automovilController.insertar()}"
+				styleClass="btn btn-primary " update="@form"
+				action="listAutomovil?faces-redirect=true" />
+			<p:commandButton value="Cancelar"
+				action="listAutomovil?faces-redirect=true" immediate="true"
+				styleClass="btn btn-default" ajax="false" />
+
+		</h:form>
+		
+	</ui:define>
+
+	<ui:define name="footerCont">
+
+	</ui:define>
+</ui:composition>
+</html>
